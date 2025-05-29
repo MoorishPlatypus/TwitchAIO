@@ -17,7 +17,7 @@ module.exports = {
 
     try {
       const user = await twitchService.getUserByUsername(username);
-      
+
       if (!user) {
         const embed = new EmbedBuilder()
           .setColor('Red')
@@ -36,7 +36,7 @@ module.exports = {
           { name: 'User ID', value: user.id, inline: true },
           { name: 'Account Type', value: user.broadcaster_type || 'Regular', inline: true },
           { name: 'Account Created', value: new Date(user.created_at).toLocaleDateString(), inline: true },
-          { name: 'View Count', value: user.view_count.toLocaleString(), inline: true }
+          { name: 'View Count', value: user.view_count.toLocaleString(), inline: true },
         )
         .setFooter({
           text: 'Twitch User Information',
@@ -49,15 +49,15 @@ module.exports = {
       }
 
       await message.channel.send({ embeds: [embed] });
-      
+
       logger.info(`User info requested for ${username} by ${message.author.tag}`);
     } catch (error) {
       logger.error('Error fetching user info:', error);
-      
+
       const embed = new EmbedBuilder()
         .setColor('Red')
         .setDescription('❌ An error occurred while fetching user information. Please try again later.');
-      
+
       await message.channel.send({ embeds: [embed] });
     }
   },

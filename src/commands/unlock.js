@@ -40,7 +40,7 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor('Red')
         .setDescription('❌ Failed to unlock the channel. Please check my permissions.');
-      
+
       await message.channel.send({ embeds: [embed] });
     }
   },

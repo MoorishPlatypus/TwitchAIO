@@ -26,7 +26,7 @@ module.exports = {
             `\`${config.discord.prefix}nuke\` - Delete and recreate the channel`,
           ].join('\n'),
           inline: false,
-        }
+        },
       )
       .setFooter({
         text: message.guild.name,

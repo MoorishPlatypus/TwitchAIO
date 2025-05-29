@@ -34,7 +34,7 @@ class TwitchService {
   async getUserByUsername(username) {
     try {
       const token = await this.getAccessToken();
-      
+
       const response = await axios.get(`https://api.twitch.tv/helix/users?login=${username}`, {
         headers: {
           'Client-ID': config.twitch.clientId,
@@ -56,7 +56,7 @@ class TwitchService {
   async getUserFollowers(userId) {
     try {
       const token = await this.getAccessToken();
-      
+
       const response = await axios.get(`https://api.twitch.tv/helix/channels/followers?broadcaster_id=${userId}`, {
         headers: {
           'Client-ID': config.twitch.clientId,
@@ -73,7 +73,7 @@ class TwitchService {
 
   // Note: Following users programmatically requires user access tokens and violates Twitch ToS
   // This method is kept for educational purposes but should not be used
-  async followUser(targetUserId, userToken) {
+  async followUser(_targetUserId, _userToken) {
     logger.warn('Attempted to use deprecated follow functionality - this violates Twitch ToS');
     throw new Error('Following users programmatically is not supported and violates Twitch Terms of Service');
   }

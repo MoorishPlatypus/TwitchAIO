@@ -1,9 +1,9 @@
-const config = require('../config/config');
-
 // Mock environment variables for testing
 process.env.DISCORD_TOKEN = 'test_discord_token';
 process.env.TWITCH_CLIENT_ID = 'test_twitch_client_id';
 process.env.TWITCH_CLIENT_SECRET = 'test_twitch_client_secret';
+
+const config = require('../config/config');
 
 describe('Configuration', () => {
   test('should load configuration correctly', () => {
