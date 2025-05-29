@@ -1,0 +1,32 @@
+module.exports = {
+  env: {
+    browser: false,
+    commonjs: true,
+    es6: true,
+    node: true,
+    jest: true,
+  },
+  extends: ['eslint:recommended'],
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+  rules: {
+    'no-console': 'off',
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'prefer-const': 'error',
+    'no-var': 'error',
+    'object-shorthand': 'error',
+    'prefer-arrow-callback': 'error',
+    'arrow-spacing': 'error',
+    'prefer-template': 'error',
+    'template-curly-spacing': 'error',
+    'no-trailing-spaces': 'error',
+    'eol-last': 'error',
+    'comma-dangle': ['error', 'always-multiline'],
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'always'],
+    'indent': ['error', 2],
+    'no-multiple-empty-lines': ['error', { max: 1 }],
+  },
+};

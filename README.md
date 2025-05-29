@@ -1,71 +1,205 @@
 # TwitchAIO
 
-TwitchAIO is a Discord bot designed to interact with Twitch channels and provide various functionalities, including adding Twitch followers, managing Discord channels, and more. This bot is built using Node.js and the Discord.js library.
+TwitchAIO is a modern Discord bot designed to interact with Twitch and provide various Discord server management functionalities. Built with Node.js and Discord.js v14, it features secure configuration management, comprehensive logging, and a modular command structure.
 
-## Features
+## ✨ Features
 
-- **Twitch Followers Management**: Add followers to a specified Twitch account.
-- **Discord Channel Management**: Lock, unlock, and nuke channels.
-- **Bot Information**: Provides information on bot latency, available stock, and how to purchase the bot.
-- **Admin Commands**: Restricted commands for bot administrators to perform certain actions.
+- **🎮 Twitch Integration**: Get user information and interact with Twitch API
+- **🔧 Discord Channel Management**: Lock, unlock, and nuke channels
+- **📊 Bot Information**: Check bot latency and status
+- **🛡️ Admin Commands**: Restricted commands for bot administrators
+- **📝 Comprehensive Logging**: Winston-based logging system
+- **🔒 Secure Configuration**: Environment-based configuration management
+- **🎯 Modern Architecture**: Built with Discord.js v14 and modern JavaScript
 
-## Installation
+## 🚀 Installation
+
+### Prerequisites
+
+- Node.js 16.0.0 or higher
+- npm or yarn package manager
+- Discord Bot Token
+- Twitch API credentials
+
+### Setup
 
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/quehole/Twitch AIO.git
+   git clone https://github.com/quehole/TwitchAIO.git
    cd TwitchAIO
    ```
 
 2. **Install Dependencies**
 
-   Make sure you have Node.js installed, then run:
-
    ```bash
    npm install
    ```
 
-3. **Configuration**
+3. **Environment Configuration**
 
-   Create a `settings.json` file in the root directory with the following structure:
+   Copy the example environment file and configure it:
 
-   ```json
-   {
-     "prefix": "!",
-     "chatchannel": "channel id",
-     "genchannel": "channel id",
-     "token": "YOUR_DISCORD_BOT_TOKEN"
-   }
+   ```bash
+   cp .env.example .env
    ```
 
+   Edit `.env` with your configuration:
 
-   Create a `tokens.txt` file in the root directory and add your Twitch tokens, each on a new line.
+   ```env
+   # Discord Bot Configuration
+   DISCORD_TOKEN=your_discord_bot_token_here
+   DISCORD_CLIENT_ID=your_discord_client_id_here
+
+   # Twitch API Configuration
+   TWITCH_CLIENT_ID=your_twitch_client_id_here
+   TWITCH_CLIENT_SECRET=your_twitch_client_secret_here
+
+   # Bot Configuration
+   BOT_PREFIX=!
+   CHAT_CHANNEL_ID=your_chat_channel_id_here
+   GEN_CHANNEL_ID=your_gen_channel_id_here
+
+   # Admin Configuration (comma-separated user IDs)
+   ADMIN_IDS=your_admin_user_id_here
+
+   # Server Configuration
+   PORT=3000
+   NODE_ENV=development
+   LOG_LEVEL=info
+   ```
 
 4. **Run the Bot**
 
-   Start the bot with:
-
    ```bash
-   node index.js
+   # Production
+   npm start
+
+   # Development (with auto-restart)
+   npm run dev
    ```
 
-## Commands
+## 📋 Commands
 
-- `!help`: Displays a help message with a list of available commands.
-- `!ping`: Shows the bot's current latency.
-- `!buy`: Information on purchasing the bot.
-- `!stock`: Shows the number of tokens currently in stock.
-- `!tfollow <twitch username>`: Adds followers to the specified Twitch account (admin only).
-- `!tspam`: Placeholder for a future feature.
-- `!nuke`: Deletes and recreates the current channel (admin only).
-- `!lock`: Locks the current channel to prevent sending messages (admin only).
-- `!unlock`: Unlocks the current channel to allow sending messages (admin only).
+### General Commands
+- `!help` - Display available commands
+- `!ping` - Check bot latency
+- `!userinfo <username>` - Get Twitch user information
 
-## Contributing
+### Admin Commands (Restricted)
+- `!lock` - Lock the current channel
+- `!unlock` - Unlock the current channel  
+- `!nuke` - Delete and recreate the current channel
 
-Feel free to submit issues or pull requests. For major changes, please open an issue first to discuss what you would like to change.
+## 🏗️ Project Structure
 
-## Contact
+```
+TwitchAIO/
+├── src/
+│   ├── commands/          # Command modules
+│   ├── services/          # Service modules (Twitch API, etc.)
+│   ├── utils/             # Utility modules (logger, etc.)
+│   ├── index.js           # Main bot file
+│   └── server.js          # Keep-alive server
+├── config/
+│   └── config.js          # Configuration management
+├── logs/                  # Log files
+├── .env.example           # Environment variables template
+├── .eslintrc.js           # ESLint configuration
+├── .prettierrc            # Prettier configuration
+└── package.json           # Dependencies and scripts
+```
 
-For any questions or further information, contact **quehole**.
+## 🛠️ Development
+
+### Code Quality
+
+The project includes ESLint and Prettier for code quality:
+
+```bash
+# Lint code
+npm run lint
+
+# Fix linting issues
+npm run lint:fix
+
+# Format code
+npm run format
+```
+
+### Adding New Commands
+
+1. Create a new file in `src/commands/`
+2. Follow the command structure:
+
+```javascript
+const { EmbedBuilder } = require('discord.js');
+
+module.exports = {
+  name: 'commandname',
+  description: 'Command description',
+  async execute(message, args, client) {
+    // Command logic here
+  },
+};
+```
+
+## 🔒 Security Features
+
+- Environment-based configuration (no hardcoded secrets)
+- Input validation and sanitization
+- Proper error handling and logging
+- Admin permission checks
+- Rate limiting considerations
+
+## 📊 Logging
+
+The bot uses Winston for comprehensive logging:
+
+- **Error logs**: `logs/error.log`
+- **Combined logs**: `logs/combined.log`
+- **Console output**: Development mode only
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Contribution Guidelines
+
+- Follow the existing code style
+- Add tests for new features
+- Update documentation as needed
+- Ensure all linting passes
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ⚠️ Important Notes
+
+- This bot is for educational and legitimate server management purposes
+- Ensure compliance with Discord's Terms of Service and Twitch's API Terms
+- The bot requires appropriate permissions in your Discord server
+- Keep your environment variables secure and never commit them to version control
+
+## 📞 Support
+
+For questions, issues, or feature requests:
+
+- Open an issue on GitHub
+- Contact: **quehole**
+
+## 🔄 Changelog
+
+### Version 2.0.0
+- Complete rewrite with Discord.js v14
+- Modern ES6+ JavaScript
+- Environment-based configuration
+- Comprehensive logging system
+- Improved security and error handling
+- Modular command structure
+- Updated Twitch API integration
